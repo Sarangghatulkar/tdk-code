@@ -4,11 +4,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# ✅ Directly using your credentials
+# 🔹 Credentials (Direct for testing)
 TELEGRAM_BOT_TOKEN = "7609865041:AAHNSVopzG248fx3Srz5ZjTJkTfiqiJakis"
 META_PIXEL_ID = "1480788746524419"
 META_ACCESS_TOKEN = "EAATPQEM4wZAUBPhCApW4w0wu1jkJSM37CHrlUTBitZB3ED2N6B3Fl5lzJ75kKtqQzGT5ZBGFzwMMSowN0TfNK2bGtJcvuZCZBcucdT8FsOV4vTP9LUED0Qpg3UBgJIl0gQOZBvvcsSG8g5PZBZCez4v70tJgmcY1gF5XoYgXIliXAANolJUnPX2FnoeRYUThIfJVZAwZDZD"
 
+# 🔹 Webhook route
 @app.route(f"/{TELEGRAM_BOT_TOKEN}", methods=["POST"])
 def telegram_webhook():
     data = request.json
@@ -16,14 +17,15 @@ def telegram_webhook():
     # Telegram user ID
     user_id = data.get("message", {}).get("from", {}).get("id")
 
-    # ✅ Send CAPI event to Meta
+    # 🔹 Send CAPI event to Meta
     payload = {
         "data": [
             {
                 "event_name": "TelegramJoinRequest",
                 "event_time": int(time.time()),
                 "user_data": {},
-                "custom_data": {"telegram_id": user_id}
+                "custom_data": {"telegram_id": user_id},
+                "test_event_code": "TEST61263"   # ✅ ensures it shows in Test Events
             }
         ],
         "access_token": META_ACCESS_TOKEN
@@ -37,8 +39,6 @@ def telegram_webhook():
 
     return jsonify({"ok": True})
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
