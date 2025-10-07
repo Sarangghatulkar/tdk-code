@@ -10,19 +10,19 @@ META_ACCESS_TOKEN = "EAATPQEM4wZAUBPhCApW4w0wu1jkJSM37CHrlUTBitZB3ED2N6B3Fl5lzJ7
 
 # Function to send event to Meta
 def send_event_to_meta(user_id):
-    url = f"https://graph.facebook.com/v18.0/{META_PIXEL_ID}/events"
+    url = f"https://graph.facebook.com/v18.0/{1480788746524419}/events"
     payload = {
         "data": [{
             "event_name": "TelegramJoinRequest",
             "event_time": int(time.time()),
             "user_data": {"external_id": str(user_id)}
         }],
-        "access_token": META_ACCESS_TOKEN
+        "access_token": EAATPQEM4wZAUBPhCApW4w0wu1jkJSM37CHrlUTBitZB3ED2N6B3Fl5lzJ75kKtqQzGT5ZBGFzwMMSowN0TfNK2bGtJcvuZCZBcucdT8FsOV4vTP9LUED0Qpg3UBgJIl0gQOZBvvcsSG8g5PZBZCez4v70tJgmcY1gF5XoYgXIliXAANolJUnPX2FnoeRYUThIfJVZAwZDZD
     }
     requests.post(url, json=payload)
 
 # Telegram webhook
-@app.route(f"/{TELEGRAM_BOT_TOKEN}", methods=['POST'])
+@app.route(f"/{7609865041:AAHNSVopzG248fx3Srz5ZjTJkTfiqiJakis}", methods=['POST'])
 def telegram_webhook():
     data = request.get_json()
     # Detect join requests
@@ -37,3 +37,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
